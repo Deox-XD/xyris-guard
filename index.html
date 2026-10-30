@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xyris Guard — Advanced Discord Security & Protection Bot</title>
+  
+  <!-- SEO & Google Search Meta Tags -->
+  <meta name="description" content="Xyris Guard is an ultra-fast Discord security, anti-nuke and anti-raid bot developed by Deox/Alok. Fast sub-25ms detection, channel restore, and automated server defense." />
+  <meta name="keywords" content="no 1 antinuke bot discord in speed, fastest antinuke bot discord, discord security bot, antinuke bot, antiraid bot, discord bot top gg, xyris guard, deox alok" />
+  <meta name="author" content="Deox / Alok" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://xyrisguard.com" />
+
+  <!-- Meta tags for Discord / OpenGraph embed -->
+  <meta property="og:title" content="Xyris Guard — Fast Anti-Nuke & Discord Security Bot" />
+  <meta property="og:description" content="Sub-25ms response time, instant auto-channel recovery, anti-raid, and military-grade Discord server protection by Deox/Alok." />
+  <meta property="og:type" content="website" />
+  <meta property="og:theme-color" content="#ef4444" />
+
+  <!-- Google Structured Data (Schema.org SoftwareApplication) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Xyris Guard",
+    "operatingSystem": "Discord",
+    "applicationCategory": "SecurityApplication",
+    "description": "Next-generation fastest anti-nuke and anti-raid security bot for Discord servers with sub-25ms latency.",
+    "author": {
+      "@type": "Person",
+      "name": "Deox / Alok"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Scroll Progress Indicator Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to Top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Custom Neon Cyber Cursor -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-glow" id="cursorGlow"></div>
+
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="grid-overlay"></div>
+  <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <div class="brand-shield">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <span class="brand-name">Xyris <span>Guard</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#simulator">Simulator</a>
+        <a href="#stats">Stats</a>
+        <a href="#developer">Developer</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          <i class="fa-brands fa-discord"></i> Support
+        </a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1563588461959585933&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <i class="fa-solid fa-plus"></i> Invite Bot
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu dropdown -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#commands" class="mobile-link">Commands</a>
+      <a href="#simulator" class="mobile-link">Simulator</a>
+      <a href="#stats" class="mobile-link">Stats</a>
+      <a href="#developer" class="mobile-link">Developer</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <div class="mobile-buttons">
+        <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          <i class="fa-brands fa-discord"></i> Support Server
+        </a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1563588461959585933&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <i class="fa-solid fa-shield-cat"></i> Add to Discord
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-container">
+      <!-- Big Shield Bot Icon / Logo Avatar -->
+      <div class="hero-bot-avatar" data-reveal>
+        <div class="avatar-tilt-wrapper">
+          <div class="avatar-ring"></div>
+          <div class="avatar-shield-card">
+            <i class="fa-solid fa-shield-halved hero-avatar-icon"></i>
+            <div class="avatar-badge"><i class="fa-solid fa-check"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-badge" data-reveal>
+        <span class="badge-dot"></span>
+        <span class="badge-text">v2.0 • Ultra-Fast Military-Grade Security</span>
+      </div>
+
+      <h1 class="hero-title" data-reveal>
+        Next-Generation <br />
+        <span class="gradient-text">Discord Protection</span> Bot
+      </h1>
+
+      <p class="hero-desc" data-reveal>
+        Shield your server from rogue admins, malicious bots, mass bans, channel nukes, and raid waves.
+        Ultra-low latency detection with automated quarantine in milliseconds.
+      </p>
+
+      <div class="hero-cta" data-reveal>
+        <a href="https://discord.com/oauth2/authorize?client_id=1563588461959585933&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer" class="btn btn-glow">
+          <i class="fa-solid fa-shield-halved"></i> Add Xyris Guard
+          <span class="arrow-icon">→</span>
+        </a>
+        <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <i class="fa-brands fa-discord"></i> Join Support Server
+        </a>
+      </div>
+
+      <!-- Quick Command Copy Widget -->
+      <div class="quick-prefix-box">
+        <span class="label">Default Prefix:</span>
+        <code>!help</code>
+        <button class="copy-btn" id="copyPrefixBtn" title="Copy command">
+          <i class="fa-regular fa-copy"></i>
+          <span class="tooltip">Copied!</span>
+        </button>
+      </div>
+
+      <!-- Mockup Showcase Card -->
+      <div class="hero-card-preview" data-reveal>
+        <div class="preview-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="preview-title">Xyris Guard Real-time Defense Log</span>
+          <span class="live-pill"><span class="pulse"></span> LIVE</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-row trigger">
+            <i class="fa-solid fa-triangle-exclamation icon-warn"></i>
+            <div class="preview-content">
+              <strong>THREAT DETECTED:</strong> Unauthorized mass channel deletion attempt by <code>attacker#0001</code>
+            </div>
+            <span class="preview-time">Just now</span>
+          </div>
+          <div class="preview-row action">
+            <i class="fa-solid fa-shield-check icon-safe"></i>
+            <div class="preview-content">
+              <strong>ACTION EXECUTED:</strong> Stripped roles, banned attacker & restored 4 channels in <strong>18ms</strong>.
+            </div>
+            <span class="preview-time">18ms</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics / Stats Section -->
+  <section class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-card" data-reveal>
+        <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="stat-number">&lt; 25ms</div>
+        <div class="stat-label">Response & Ban Latency</div>
+      </div>
+      <div class="stat-card" data-reveal>
+        <div class="stat-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="stat-number">99.9%</div>
+        <div class="stat-label">Raid Prevention Rate</div>
+      </div>
+      <div class="stat-card" data-reveal>
+        <div class="stat-icon"><i class="fa-solid fa-server"></i></div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Uptime & Sharded Core</div>
+      </div>
+      <div class="stat-card" data-reveal>
+        <div class="stat-icon"><i class="fa-solid fa-lock"></i></div>
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Nuke Triggers Monitored</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Powerful Modules</span>
+      <h2 class="section-title">Built to Protect What You Built</h2>
+      <p class="section-desc">Everything you need to secure your community from small groups to 100k+ member servers.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card highlight" data-reveal>
+        <div class="card-icon-wrapper red">
+          <i class="fa-solid fa-shield-virus"></i>
+        </div>
+        <h3>Anti-Nuke Engine</h3>
+        <p>Instant defense against rogue admins and compromised webhooks. Automatically detects and bans users attempting mass channel, role, or emoji deletions.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> Channel & Role Create/Delete Protection</li>
+          <li><i class="fa-solid fa-check"></i> Webhook creation & spam mitigation</li>
+          <li><i class="fa-solid fa-check"></i> Automatic recovery & recovery logs</li>
+        </ul>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card" data-reveal>
+        <div class="card-icon-wrapper orange">
+          <i class="fa-solid fa-users-slash"></i>
+        </div>
+        <h3>Anti-Raid Defense</h3>
+        <p>Stop bot waves and mass alt joins in their tracks. Auto-lockdown triggers when sudden spikes in join rates occur.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> Join-rate anomaly detection</li>
+          <li><i class="fa-solid fa-check"></i> Instant server lockdown & raidmode</li>
+          <li><i class="fa-solid fa-check"></i> Account age filtering & verification</li>
+        </ul>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card" data-reveal>
+        <div class="card-icon-wrapper purple">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <h3>Automated AutoMod</h3>
+        <p>Filter out malicious links, invite spam, mass mentions, and toxic content without lifting a finger.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> Discord invite & phishing link blocker</li>
+          <li><i class="fa-solid fa-check"></i> Channel & role whitelist exceptions</li>
+          <li><i class="fa-solid fa-check"></i> Graduated penalties: warn, mute, ban</li>
+        </ul>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card" data-reveal>
+        <div class="card-icon-wrapper blue">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3>Multi-Whitelist & Extra Owner</h3>
+        <p>Granular permissions hierarchy so your trusted team can manage roles and settings without risking full server compromise.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> Custom trusted owners list</li>
+          <li><i class="fa-solid fa-check"></i> Multi-tier module whitelisting</li>
+          <li><i class="fa-solid fa-check"></i> Immunity management</li>
+        </ul>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card" data-reveal>
+        <div class="card-icon-wrapper green">
+          <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+        <h3>Comprehensive Audit Logging</h3>
+        <p>Detailed embeds logged straight to your secure logging channel with precise perpetrator tags, IDs, and timestamps.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> Real-time moderation & mod-action logs</li>
+          <li><i class="fa-solid fa-check"></i> Channel & role alteration receipts</li>
+          <li><i class="fa-solid fa-check"></i> Member joins, leaves & voice logs</li>
+        </ul>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card" data-reveal>
+        <div class="card-icon-wrapper cyan">
+          <i class="fa-solid fa-toolbox"></i>
+        </div>
+        <h3>Utility & Moderation Suite</h3>
+        <p>Complete set of rapid moderation tools including purge, purge bots, mass lock, hide channels, starboards, and tickets.</p>
+        <ul class="feature-bullets">
+          <li><i class="fa-solid fa-check"></i> <code>!lockall</code> & <code>!hideall</code> panic buttons</li>
+          <li><i class="fa-solid fa-check"></i> Interactive ticketing and giveaways</li>
+          <li><i class="fa-solid fa-check"></i> Slash commands & prefix compatibility</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commands Showcase Section -->
+  <section class="commands-section" id="commands">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Command Center</span>
+      <h2 class="section-title">Clean, Powerful Commands</h2>
+      <p class="section-desc">Search or filter through commands with instant copy.</p>
+    </div>
+
+    <!-- Live Command Search Bar -->
+    <div class="cmd-search-wrapper" data-reveal>
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="cmdSearchInput" class="cmd-search-input" placeholder="Search any command (e.g., antinuke, ban, lock, purge, role)..." />
+      <button class="cmd-clear-btn" id="cmdClearBtn" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="command-tabs" data-reveal>
+      <button class="tab-btn active" data-tab="antinuke">Anti-Nuke</button>
+      <button class="tab-btn" data-tab="automod">AutoMod</button>
+      <button class="tab-btn" data-tab="moderation">Moderation</button>
+      <button class="tab-btn" data-tab="utility">Utility</button>
+    </div>
+
+    <div class="commands-content" data-reveal>
+      <!-- Anti-Nuke Tab -->
+      <div class="command-group active" id="tab-antinuke">
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!antinuke enable / disable</code></div>
+          <div class="cmd-info">Toggles the full anti-nuke suite with instant threat response.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!whitelist add &lt;@user&gt;</code></div>
+          <div class="cmd-info">Whitelists a trusted admin from triggering anti-nuke sanctions.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!extraowner &lt;add/remove&gt; &lt;@user&gt;</code></div>
+          <div class="cmd-info">Grants trusted co-owners permission to modify security settings.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!antiraid &lt;on/off&gt;</code></div>
+          <div class="cmd-info">Enables automatic server protection against mass join raids.</div>
+        </div>
+      </div>
+
+      <!-- AutoMod Tab -->
+      <div class="command-group" id="tab-automod">
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!automod setup</code></div>
+          <div class="cmd-info">Launches interactive setup for link filters, bad words, and spam rules.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!amwhitelist &lt;@user/@role&gt;</code></div>
+          <div class="cmd-info">Bypasses automod filters for moderators or trusted roles.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!amfilter &lt;type&gt; &lt;action&gt;</code></div>
+          <div class="cmd-info">Sets punitive action (delete, warn, mute) for specific infractions.</div>
+        </div>
+      </div>
+
+      <!-- Moderation Tab -->
+      <div class="command-group" id="tab-moderation">
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!lockall / !unlockall</code></div>
+          <div class="cmd-info">Instantly freezes or unfreezes every public channel in the server.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!purgebots &lt;amount&gt;</code></div>
+          <div class="cmd-info">Deletes messages sent only by automated bots within recent history.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!mute &lt;@user&gt; &lt;duration&gt; [reason]</code></div>
+          <div class="cmd-info">Times out an offender with automated DM notifications.</div>
+        </div>
+      </div>
+
+      <!-- Utility Tab -->
+      <div class="command-group" id="tab-utility">
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!help</code></div>
+          <div class="cmd-info">Opens the interactive categorized menu of all available bot commands.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!serverinfo / !userinfo</code></div>
+          <div class="cmd-info">Displays rich analytical embeds with account ages, roles, and safety tags.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-syntax"><code>!ticket setup</code></div>
+          <div class="cmd-info">Creates a reactive ticket panel with buttons for user inquiries.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live Attack Simulation Sandbox -->
+  <section class="simulation-section" id="simulator">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Interactive Sandbox</span>
+      <h2 class="section-title">Test Xyris Guard Defense Live</h2>
+      <p class="section-desc">Trigger simulated security breaches and watch how Xyris Guard defends your server in real-time.</p>
+    </div>
+
+    <div class="sim-container" data-reveal>
+      <div class="sim-controls">
+        <span class="sim-label">Choose Simulated Threat:</span>
+        <div class="sim-buttons">
+          <button class="sim-btn" data-threat="nuke"><i class="fa-solid fa-bomb"></i> Mass Channel Delete</button>
+          <button class="sim-btn" data-threat="raid"><i class="fa-solid fa-users-slash"></i> 100 Bot Raid Wave</button>
+          <button class="sim-btn" data-threat="spam"><i class="fa-solid fa-link-slash"></i> Phishing Link Spam</button>
+          <button class="sim-btn" data-threat="admin"><i class="fa-solid fa-user-xmark"></i> Rogue Admin Perms Abuse</button>
+        </div>
+      </div>
+
+      <div class="sim-terminal">
+        <div class="sim-terminal-bar">
+          <div class="sim-term-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="sim-term-title"><i class="fa-solid fa-terminal"></i> Xyris Guard Security Sandbox Terminal</span>
+          <button class="sim-reset-btn" id="simResetBtn" title="Reset Sandbox"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+        </div>
+
+        <div class="sim-terminal-screen" id="simTerminalScreen">
+          <div class="term-line system"><span class="prompt">[SYSTEM READY]</span> Xyris Guard Security Core v2.0 online. Select a threat scenario above to simulate response.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Server Comparison Table -->
+  <section class="comparison-section">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Why Choose Us</span>
+      <h2 class="section-title">Standard Bot vs Xyris Guard</h2>
+      <p class="section-desc">See the differences between generic Discord security bots and Xyris Guard's specialized speed architecture.</p>
+    </div>
+
+    <div class="comparison-table-wrapper" data-reveal>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Security Capability</th>
+            <th>Generic Bots</th>
+            <th class="highlight-col">Xyris Guard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reaction & Quarantine Latency</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> 500ms – 3000ms</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> &lt; 25ms (Sub-millisecond)</span></td>
+          </tr>
+          <tr>
+            <td>Automatic Nuked Channel Restoration</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> None or manual</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> Instant Clone &amp; Re-link</span></td>
+          </tr>
+          <tr>
+            <td>Rogue Administrator Permission Stripping</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> Slow or restricted</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> Immediate quarantine</span></td>
+          </tr>
+          <tr>
+            <td>Multi-Whitelist Tiered Hierarchy</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> Single whitelist</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> ExtraOwner + Module Whitelists</span></td>
+          </tr>
+          <tr>
+            <td>Join-Rate Anomaly Lockout (Anti-Raid)</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> Basic slowmode</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> Deep raidmode + Alt Age filter</span></td>
+          </tr>
+          <tr>
+            <td>Fast Hybrid-Sharded Core</td>
+            <td><span class="cross"><i class="fa-solid fa-xmark"></i> Single thread bottleneck</span></td>
+            <td class="highlight-col"><span class="check"><i class="fa-solid fa-check"></i> LMDB + Distributed Shards</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- How to Add Section -->
+  <section class="how-to-add">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Quick Start</span>
+      <h2 class="section-title">Add Xyris Guard in 3 Easy Steps</h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card" data-reveal>
+        <div class="step-num">01</div>
+        <h3>Invite to Server</h3>
+        <p>Click the invite button and select the Discord server you wish to secure. Ensure Administrator permissions are granted.</p>
+      </div>
+      <div class="step-card" data-reveal>
+        <div class="step-num">02</div>
+        <h3>Move Bot Role Up</h3>
+        <p>In your Server Settings &rarr; Roles, drag the <code>Xyris Guard</code> role above the roles you want it to protect and moderate.</p>
+      </div>
+      <div class="step-card" data-reveal>
+        <div class="step-num">03</div>
+        <h3>Run Setup</h3>
+        <p>Type <code>!antinuke enable</code> and set up logging with <code>!logging setup</code>. Your server is now safeguarded!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Got Questions?</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-accordion" data-reveal>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Why does Xyris Guard need Administrator permission?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>Security bots require elevated permissions to ban attackers faster than Discord rate limits, instantly recreate nuked channels, and strip permissions from rogue admins before damage spreads.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Can my server co-owners manage the bot without owner transfers?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! With the <code>!extraowner</code> command, the server owner can designate trusted co-owners who can configure whitelists and settings safely.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Is Xyris Guard free to use?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, all core protection features including Anti-Nuke, Anti-Raid, AutoMod, Logging, and Moderation are completely free to add and use.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Where can I get help if something isn't working?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>You can join our official 24/7 Discord Support Server at <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer">discord.gg/qGXMweYm5x</a> where our team will assist you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer Profile Section (Deox/Alok) -->
+  <section class="developer-section" id="developer">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Lead Architect</span>
+      <h2 class="section-title">Developed By Deox / Alok</h2>
+      <p class="section-desc">The creator, developer, and security enthusiast behind Xyris Guard.</p>
+    </div>
+
+    <div class="dev-card-wrapper" data-reveal>
+      <div class="dev-card">
+        <div class="dev-card-glow"></div>
+        <div class="dev-pfp-container">
+          <div class="dev-pfp-ring"></div>
+          <div class="dev-pfp-box">
+            <img src="deox-pfp.jpg" alt="Deox / Alok Profile Picture" class="dev-pfp-img" />
+            <div class="dev-status-badge" title="Online & Coding">
+              <span class="status-pulse"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dev-info">
+          <div class="dev-role-badge">
+            <i class="fa-solid fa-code"></i> Bot Creator & Lead Developer
+          </div>
+          <h3 class="dev-name">Deox / Alok</h3>
+          <p class="dev-tagline">Software Developer & Discord Security Engineer</p>
+          
+          <p class="dev-bio">
+            Hey, I'm <strong>Deox / Alok</strong>. I design and architect high-performance bots and modern security frameworks built to protect Discord communities from malicious raids, mass bans, and rogue attacks. Xyris Guard was built from the ground up to deliver military-grade defense in sub-millisecond reaction speeds.
+          </p>
+
+          <div class="dev-highlights">
+            <div class="highlight-item">
+              <i class="fa-solid fa-microchip"></i>
+              <span>High-Performance Bot Infrastructure</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Anti-Nuke & Defense Algorithms</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Ultra-Low Latency Execution</span>
+            </div>
+          </div>
+
+          <div class="dev-socials">
+            <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer" class="dev-social-btn" title="Chat on Discord">
+              <i class="fa-brands fa-discord"></i> Connect with Deox / Alok
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Big Call to Action Banner -->
+  <section class="cta-banner">
+    <div class="cta-box" data-reveal>
+      <div class="cta-content">
+        <h2>Ready to Fortify Your Server?</h2>
+        <p>Join hundreds of communities that trust Xyris Guard for 24/7 uninterrupted server defense.</p>
+        <div class="cta-buttons">
+          <a href="https://discord.com/oauth2/authorize?client_id=1563588461959585933&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-plus"></i> Add Bot to Server
+          </a>
+          <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
+            <i class="fa-brands fa-discord"></i> Join Community
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand-col">
+        <div class="brand-shield small">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <span class="brand-name">Xyris <span>Guard</span></span>
+        <p class="footer-text">Advanced Discord security bot with ultra-fast protection systems.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Navigation</h4>
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#stats">Stats</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>External Links</h4>
+        <a href="https://discord.com/oauth2/authorize?client_id=1563588461959585933&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+        <a href="https://discord.gg/qGXMweYm5x" target="_blank" rel="noopener noreferrer">Support Server</a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord API</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Xyris Guard. Developed with passion by <strong>Deox / Alok</strong>. Not affiliated with Discord Inc.</p>
+      <div class="status-indicator">
+        <span class="status-dot"></span> All Systems Operational
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
